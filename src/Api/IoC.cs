@@ -1,4 +1,4 @@
-﻿using Api.Exceptions;
+using Api.Exceptions;
 using Application.Behaviors;
 using Application.Users.Commands.CreateUser;
 using Application.Users.Commands.DeleteUser;
@@ -81,13 +81,19 @@ namespace Api
                     }
                 });
 
-                //var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+                
+                
             });
         }
 
         private static void RegisterDbContext(IServiceCollection services, ConfigurationManager configurationManager)
         {
+            
+            if (string.Equals(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"), "Testing", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
             var connectionString = configurationManager.GetConnectionString("DatabaseConnection");
             services.AddDbContext<DatabaseContext>(options =>
             {

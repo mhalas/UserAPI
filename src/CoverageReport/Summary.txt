@@ -1,0 +1,53 @@
+Summary
+  Generated on: 2026-06-10 - 09:28:47
+  Coverage date: 2026-06-10 - 09:28:20 - 2026-06-10 - 09:28:25
+  Parser: MultiReport (3x Cobertura)
+  Assemblies: 4
+  Classes: 25
+  Files: 24
+  Line coverage: 20.9%
+  Covered lines: 132
+  Uncovered lines: 497
+  Coverable lines: 629
+  Total lines: 1163
+  Branch coverage: 1.3% (3 of 224)
+  Covered branches: 3
+  Total branches: 224
+  Method coverage: 59.5% (56 of 94)
+  Full method coverage: 58.5% (55 of 94)
+  Covered methods: 56
+  Fully covered methods: 55
+  Total methods: 94
+
+Api                                                                  5.7%
+  Api.Controllers.HeartbeatController                                100%
+  Api.Controllers.UsersController                                    100%
+  Api.Exceptions.ValidationExceptionHandler                            0%
+  Api.IoC                                                              0%
+  Microsoft.AspNetCore.OpenApi.Generated                               0%
+  Program                                                              0%
+  System.Runtime.CompilerServices                                      0%
+
+Application                                                         67.8%
+  Application.Behaviors.ValidationBehavior<T1, T2>                     0%
+  Application.Users.Commands.CreateUser.CreateUserCommandHandler     100%
+  Application.Users.Commands.DeleteUser.DeleteUserCommand            100%
+  Application.Users.Commands.DeleteUser.DeleteUserCommandHandler     100%
+  Application.Users.Commands.UpdateUser.UpdateUserCommand            100%
+  Application.Users.Commands.UpdateUser.UpdateUserCommandHandler     100%
+  Application.Users.Common.UserDto                                   100%
+  Application.Users.Queries.GetSingleUser.GetUserByIdQueryHandler    100%
+  Application.Users.Queries.GetUserById.GetUserByIdQuery             100%
+  Application.Users.Queries.GetUsersList.GetUsersListQuery           100%
+  Application.Users.Queries.GetUsersList.GetUsersListQueryHandler    100%
+
+Domain                                                              83.3%
+  Domain.Common.PagedRequest                                         100%
+  Domain.Common.PagedResult<T>                                        80%
+  Domain.Entities.User                                               100%
+  Domain.Infrastructure.Repositories.Users.GetUserList                 0%
+
+Infrastructure                                                      94.3%
+  Infrastructure.DatabaseContext                                     100%
+  Infrastructure.Repositories.BaseRepository<T>                     93.1%
+  Infrastructure.Repositories.Users.UserRepository                   100%

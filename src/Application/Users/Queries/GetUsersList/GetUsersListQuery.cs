@@ -10,5 +10,9 @@ namespace Application.Users.Queries.GetUsersList
         public int PageSize { get; init; } = 10;
         public string SortBy { get; init; } = string.Empty;
         public bool IsDescending { get; set; } = false;
+        public string? FilterUsername { get; set; }
+        public string? FilterFirstName { get; set; }
+        public string? FilterLastName { get; set; }
+        public bool? FilterIsDeleted { get; set; } = false;
     }
 }

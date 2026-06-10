@@ -52,7 +52,7 @@ namespace Infrastructure.Repositories
 
         private IQueryable<TEntity> SortBy(PagedRequest pagedRequest, IQueryable<TEntity> query)
         {
-            var sortBy = pagedRequest.SortBy ?? "Id";
+            var sortBy = string.IsNullOrWhiteSpace(pagedRequest.SortBy) ? "Id" : pagedRequest.SortBy;
             string sortDirection = pagedRequest.IsDescending ? "descending" : "ascending";
 
             string ordering = $"{sortBy} {sortDirection}";

@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Tests/">
+    <Project Path="Api.E2E.Tests/Api.E2E.Tests.csproj" />
     <Project Path="Api.Tests/Api.Tests.csproj" Id="67b424c1-6c5b-426d-b8d8-e13af7417e83" />
     <Project Path="Application.Tests/Application.Tests.csproj" Id="d2996182-f4d9-4575-97f0-f671e21c57b5" />
     <Project Path="Infrastructure.Tests/Infrastructure.Tests.csproj" Id="1b5d9b52-f763-4544-9626-b26c6bf457e9" />

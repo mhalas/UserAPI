@@ -9,7 +9,7 @@ namespace Infrastructure.Repositories.Users
         public override async Task<User> UpdateAsync(User entity, CancellationToken cancellationToken)
         {
             var userToUpdate = await GetAsync(entity.Id, cancellationToken);
-            userToUpdate.Adapt(entity);
+            entity.Adapt(userToUpdate);
 
             await databaseContext.SaveChangesAsync(cancellationToken);
             return userToUpdate;
