@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Tests/">
+    <Project Path="Api.Tests/Api.Tests.csproj" Id="67b424c1-6c5b-426d-b8d8-e13af7417e83" />
+    <Project Path="Application.Tests/Application.Tests.csproj" Id="d2996182-f4d9-4575-97f0-f671e21c57b5" />
+    <Project Path="Infrastructure.Tests/Infrastructure.Tests.csproj" Id="1b5d9b52-f763-4544-9626-b26c6bf457e9" />
+  </Folder>
+  <Project Path="Api/Api.csproj" Id="ae43e7d3-d5f5-4b35-b043-cd14cbe507f9" />
+  <Project Path="Application/Application.csproj" Id="dd73a190-2507-4064-9423-303a49d1c9f5" />
+  <Project Path="Domain/Domain.csproj" Id="9ea9ee91-bca3-4561-9a49-0f09f290c8ee" />
+  <Project Path="Infrastructure/Infrastructure.csproj" Id="8b4e52e7-47b7-415e-a377-13b018102b89" />
+</Solution>
