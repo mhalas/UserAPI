@@ -1,6 +1,9 @@
-﻿namespace Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities
 {
-    public class User: IId
+    [Table("AppUser")]
+    public class AppUser: IId
     {
         public Guid Id { get; set; }
         public string Username { get; set; }

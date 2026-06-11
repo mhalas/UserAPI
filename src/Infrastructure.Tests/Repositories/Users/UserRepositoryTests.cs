@@ -33,7 +33,7 @@ namespace Infrastructure.Tests.Repositories.Users
         public async Task CreateAsync_ShouldAddUserToDatabase()
         {
             
-            var user = new User
+            var user = new AppUser
             {
                 Id = Guid.NewGuid(),
                 Username = "johndoe",
@@ -46,7 +46,7 @@ namespace Infrastructure.Tests.Repositories.Users
             var resultId = await _repository.CreateAsync(user, CancellationToken.None);
 
             
-            var savedUser = await _context.Users.FindAsync(resultId);
+            var savedUser = await _context.AppUsers.FindAsync(resultId);
             Assert.That(savedUser, Is.Not.Null);
             Assert.That(savedUser!.FirstName, Is.EqualTo(user.FirstName));
         }
@@ -56,8 +56,8 @@ namespace Infrastructure.Tests.Repositories.Users
         {
             
             var userId = Guid.NewGuid();
-            var user = new User { Id = userId, Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
-            await _context.Users.AddAsync(user);
+            var user = new AppUser { Id = userId, Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
+            await _context.AppUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 
             
@@ -72,11 +72,11 @@ namespace Infrastructure.Tests.Repositories.Users
         public async Task GetAsync_Paged_ShouldReturnPagedResults()
         {
             
-            await _context.Users.AddRangeAsync(new List<User>
+            await _context.AppUsers.AddRangeAsync(new List<AppUser>
             {
-                new User { Id = Guid.NewGuid(), Username = "alice", FirstName = "Alice", LastName = "Z", BirthDate = new DateTime(1990, 1, 1) },
-                new User { Id = Guid.NewGuid(), Username = "bob", FirstName = "Bob", LastName = "Y", BirthDate = new DateTime(1990, 1, 1) },
-                new User { Id = Guid.NewGuid(), Username = "charlie", FirstName = "Charlie", LastName = "X", BirthDate = new DateTime(1990, 1, 1) }
+                new AppUser { Id = Guid.NewGuid(), Username = "alice", FirstName = "Alice", LastName = "Z", BirthDate = new DateTime(1990, 1, 1) },
+                new AppUser { Id = Guid.NewGuid(), Username = "bob", FirstName = "Bob", LastName = "Y", BirthDate = new DateTime(1990, 1, 1) },
+                new AppUser { Id = Guid.NewGuid(), Username = "charlie", FirstName = "Charlie", LastName = "X", BirthDate = new DateTime(1990, 1, 1) }
             });
             await _context.SaveChangesAsync();
 
@@ -103,11 +103,11 @@ namespace Infrastructure.Tests.Repositories.Users
         {
             
             var userId = Guid.NewGuid();
-            var user = new User { Id = userId, Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
-            await _context.Users.AddAsync(user);
+            var user = new AppUser { Id = userId, Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
+            await _context.AppUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            var updatedUser = new User { Id = userId, Username = "johnny", FirstName = "Johnny", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
+            var updatedUser = new AppUser { Id = userId, Username = "johnny", FirstName = "Johnny", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
 
             
             var result = await _repository.UpdateAsync(updatedUser, CancellationToken.None);
@@ -119,7 +119,7 @@ namespace Infrastructure.Tests.Repositories.Users
                 Assert.That(result.Username, Is.EqualTo("johnny"));
             });
             
-            var dbUser = await _context.Users.FindAsync(userId);
+            var dbUser = await _context.AppUsers.FindAsync(userId);
             Assert.That(dbUser!.FirstName, Is.EqualTo("Johnny"));
         }
 
@@ -128,15 +128,15 @@ namespace Infrastructure.Tests.Repositories.Users
         {
             
             var userId = Guid.NewGuid();
-            var user = new User { Id = userId, Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
-            await _context.Users.AddAsync(user);
+            var user = new AppUser { Id = userId, Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
+            await _context.AppUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 
             
             await _repository.RemoveAsync(userId, CancellationToken.None);
 
             
-            var dbUser = await _context.Users.FindAsync(userId);
+            var dbUser = await _context.AppUsers.FindAsync(userId);
             Assert.That(dbUser, Is.Null);
         }
     }

@@ -4,9 +4,9 @@ using Mapster;
 
 namespace Infrastructure.Repositories.Users
 {
-    public class UserRepository(DatabaseContext databaseContext) : BaseRepository<User>(databaseContext), IUserRepository
+    public class UserRepository(DatabaseContext databaseContext) : BaseRepository<AppUser>(databaseContext), IUserRepository
     {
-        public override async Task<User> UpdateAsync(User entity, CancellationToken cancellationToken)
+        public override async Task<AppUser> UpdateAsync(AppUser entity, CancellationToken cancellationToken)
         {
             var userToUpdate = await GetAsync(entity.Id, cancellationToken);
             entity.Adapt(userToUpdate);

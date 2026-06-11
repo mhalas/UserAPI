@@ -31,9 +31,9 @@ namespace Application.Tests.Users.Queries
                 FilterLastName = "Doe",
                 FilterIsDeleted = true
             };
-            var pagedResult = new PagedResult<User>
+            var pagedResult = new PagedResult<AppUser>
             {
-                Items = new List<User>(),
+                Items = new List<AppUser>(),
                 PageNumber = 1,
                 PageSize = 10
             };
@@ -63,11 +63,11 @@ namespace Application.Tests.Users.Queries
                 SortBy = "FirstName",
                 IsDescending = false
             };
-            var pagedResult = new PagedResult<User>
+            var pagedResult = new PagedResult<AppUser>
             {
-                Items = new List<User>
+                Items = new List<AppUser>
                 {
-                    new User { Id = Guid.NewGuid(), Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990,1,1) }
+                    new AppUser { Id = Guid.NewGuid(), Username = "johndoe", FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990,1,1) }
                 },
                 PageNumber = 1,
                 PageSize = 10

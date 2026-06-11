@@ -32,7 +32,7 @@ namespace Application.Tests.Users.Commands
                 LastName = "Doe",
                 BirthDate = new DateTime(1992, 2, 2)
             };
-            var updatedUser = new User
+            var updatedUser = new AppUser
             {
                 Id = userId,
                 Username = "janedoe",
@@ -40,7 +40,7 @@ namespace Application.Tests.Users.Commands
                 LastName = "Doe",
                 BirthDate = new DateTime(1992, 2, 2)
             };
-            _userRepository.UpdateAsync(Arg.Any<User>(), Arg.Any<CancellationToken>())
+            _userRepository.UpdateAsync(Arg.Any<AppUser>(), Arg.Any<CancellationToken>())
                 .Returns(updatedUser);
 
             
@@ -54,7 +54,7 @@ namespace Application.Tests.Users.Commands
                 Assert.That(result.LastName, Is.EqualTo(command.LastName));
                 Assert.That(result.BirthDate, Is.EqualTo(command.BirthDate));
             });
-            await _userRepository.Received(1).UpdateAsync(Arg.Is<User>(u => 
+            await _userRepository.Received(1).UpdateAsync(Arg.Is<AppUser>(u => 
                 u.Id == userId &&
                 u.Username == command.Username &&
                 u.FirstName == command.FirstName && 

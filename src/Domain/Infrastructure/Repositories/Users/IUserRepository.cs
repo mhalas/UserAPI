@@ -2,7 +2,7 @@
 
 namespace Domain.Infrastructure.Repositories.Users
 {
-    public interface IUserRepository: IBaseRepository<User>
+    public interface IUserRepository: IBaseRepository<AppUser>
     {
 
     }

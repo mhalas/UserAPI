@@ -9,7 +9,7 @@ namespace Application.Users.Commands.CreateUser
     {
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var newUser = request.Adapt<User>();
+            var newUser = request.Adapt<AppUser>();
 
             return await userRepository.CreateAsync(newUser, cancellationToken);
         }

@@ -11,6 +11,7 @@ namespace Infrastructure.Repositories
     {
         public async Task<Guid> CreateAsync(TEntity entity, CancellationToken cancellationToken)
         {
+            entity.Id = Guid.NewGuid();
             await databaseContext.AddAsync(entity, cancellationToken);
             await databaseContext.SaveChangesAsync(cancellationToken);
 
@@ -28,6 +29,9 @@ namespace Infrastructure.Repositories
 
             query = FilterBy(pagedRequest, query);
             query = SortBy(pagedRequest, query);
+
+            var totalCount = query.Count();
+
             query = Pagination(pagedRequest, query);
 
             var items = await query.ToListAsync(cancellationToken);
@@ -37,6 +41,7 @@ namespace Infrastructure.Repositories
                 Items = items,
                 PageNumber = pagedRequest.PageNumber,
                 PageSize = pagedRequest.PageSize,
+                TotalCount = totalCount
             };
         }
 

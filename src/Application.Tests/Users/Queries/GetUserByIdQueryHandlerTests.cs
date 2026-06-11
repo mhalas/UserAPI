@@ -26,7 +26,7 @@ namespace Application.Tests.Users.Queries
             
             var userId = Guid.NewGuid();
             var query = new GetUserByIdQuery { Id = userId };
-            var user = new User
+            var user = new AppUser
             {
                 Id = userId,
                 Username = "johndoe",

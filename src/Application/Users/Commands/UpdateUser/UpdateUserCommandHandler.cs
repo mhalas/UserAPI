@@ -11,7 +11,7 @@ namespace Application.Users.Commands.UpdateUser
     {
         public async Task<UserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var userToUpdate = request.Adapt<User>();
+            var userToUpdate = request.Adapt<AppUser>();
 
             var result = await userRepository.UpdateAsync(userToUpdate, cancellationToken);
 

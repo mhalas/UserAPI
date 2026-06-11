@@ -30,7 +30,7 @@ namespace Application.Tests.Users.Commands
                 BirthDate = new DateTime(1990, 1, 1)
             };
             var userId = Guid.NewGuid();
-            _userRepository.CreateAsync(Arg.Any<User>(), Arg.Any<CancellationToken>())
+            _userRepository.CreateAsync(Arg.Any<AppUser>(), Arg.Any<CancellationToken>())
                 .Returns(userId);
 
             
@@ -38,7 +38,7 @@ namespace Application.Tests.Users.Commands
 
             
             Assert.That(result, Is.EqualTo(userId));
-            await _userRepository.Received(1).CreateAsync(Arg.Is<User>(u => 
+            await _userRepository.Received(1).CreateAsync(Arg.Is<AppUser>(u => 
                 u.Username == command.Username &&
                 u.FirstName == command.FirstName && 
                 u.LastName == command.LastName && 
