@@ -30,7 +30,6 @@ jobs:
       working-directory: ./src
       run: dotnet publish --no-build -c Release -o ./publish-output
     - name: Upload Artifact
-      working-directory: ./src
       uses: actions/upload-artifact@v4
       with:
         name: UserAPI
