@@ -31,18 +31,23 @@ jobs:
       run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Publish
       working-directory: ./src
-      run: dotnet publish --no-build -c Release -o ./publish-output
+      run: dotnet publish --no-build -c Release -o ../publish-output
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: UserAPI
-        path: ./src/publish-output/
+        path: publish-output/
         if-no-files-found: error
     - name: Zip Artifact
-      working-directory: ./src
-      run: zip -r UserAPI.zip ./publish-output/
+      run: cd publish-output && zip -r ../UserAPI.zip .
+    - name: Wait for tag propagation
+      if: startsWith(github.ref, 'refs/tags/')
+      run: sleep 5
     - name: Create Release
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: UserAPI.zip
+        tag_name: ${{ github.ref_name }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fail_on_unmatched_files: true
