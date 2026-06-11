@@ -33,5 +33,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: UserAPI
-        path: ./publish-output/
+        path: ./src/publish-output/
         if-no-files-found: error
