@@ -25,7 +25,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       working-directory: ./src
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Publish
       working-directory: ./src
       run: dotnet publish --no-build -c Release -o ./publish-output
