@@ -35,3 +35,10 @@ jobs:
         name: UserAPI
         path: ./src/publish-output/
         if-no-files-found: error
+    - name: Zip Artifact
+      working-directory: ./src
+      run: zip -r UserAPI.zip ./publish-output/
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: UserAPI.zip
