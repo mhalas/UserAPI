@@ -106,7 +106,7 @@ namespace Api
                 return;
             }
 
-            var connectionString = configurationManager.GetConnectionString("DatabaseConnection");
+            var connectionString = configurationManager.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options =>
             {
                 options.UseSqlServer(connectionString);
