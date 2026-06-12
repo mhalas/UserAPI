@@ -12,7 +12,6 @@ using Infrastructure;
 using Infrastructure.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
-using System.Reflection;
 
 namespace Api
 {
@@ -81,8 +80,21 @@ namespace Api
                     }
                 });
 
-                
-                
+                var xmlFiles = new[]
+                {
+                    $"{typeof(IoC).Assembly.GetName().Name}.xml",
+                    $"{typeof(GetUsersListQuery).Assembly.GetName().Name}.xml",
+                    $"{typeof(Domain.Entities.AppUser).Assembly.GetName().Name}.xml"
+                };
+
+                foreach (var xmlFile in xmlFiles)
+                {
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                    if (File.Exists(xmlPath))
+                    {
+                        options.IncludeXmlComments(xmlPath);
+                    }
+                }
             });
         }
 

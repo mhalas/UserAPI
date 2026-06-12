@@ -1,4 +1,6 @@
 using Api;
+using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 IoC.RegisteredServices(builder.Services, builder.Configuration);
@@ -22,5 +24,14 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+
+    dbContext.Database.Migrate();
+}
+
 
 app.Run();

@@ -1,6 +1,44 @@
-@Api_HostAddress = http://localhost:5155
+@Api_HostAddress = http://localhost:8080
 
-GET {{Api_HostAddress}}/weatherforecast/
+### Heartbeat
+GET {{Api_HostAddress}}/api/Heartbeat
 Accept: application/json
 
-###
+### Get Users List
+GET {{Api_HostAddress}}/api/Users?PageNumber=1&PageSize=10
+Accept: application/json
+
+### Create User
+# @name createUser
+POST {{Api_HostAddress}}/api/Users
+Content-Type: application/json
+
+{
+  "username": "jdoe",
+  "firstName": "John",
+  "lastName": "Doe",
+  "birthDate": "1990-01-01T00:00:00",
+  "isDeleted": false
+}
+
+### Get User by ID
+# Replace {id} with a valid Guid from the Create User response or list
+@userId = 00000000-0000-0000-0000-000000000000
+GET {{Api_HostAddress}}/api/Users/{{userId}}
+Accept: application/json
+
+### Update User
+PUT {{Api_HostAddress}}/api/Users/{{userId}}
+Content-Type: application/json
+
+{
+  "username": "jdoe_updated",
+  "firstName": "John",
+  "lastName": "Smith",
+  "birthDate": "1990-01-01T00:00:00",
+  "isDeleted": false
+}
+
+### Delete User
+DELETE {{Api_HostAddress}}/api/Users/{{userId}}
+Accept: application/json
