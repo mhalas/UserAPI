@@ -1,15 +1,20 @@
 services:
-  api:
-    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/user-api:latest
+  user-api:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/user-api/user-api:latest
     ports:
       - "8080:8080"
       - "8081:8081"
     environment:
-      - ConnectionStrings__DefaultConnection=Server={DB_HOST};Database={DB_NAME};User Id={DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;
+      - ConnectionStrings__DefaultConnection=Server=user-api-db,1433;Database={DB_NAME};User Id={DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;
     depends_on:
-      - db
-  db:
+      - user-api-db
+  user-api-db:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${DB_PASSWORD} -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=${DB_PASSWORD}

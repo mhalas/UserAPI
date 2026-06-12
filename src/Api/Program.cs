@@ -32,6 +32,14 @@ using (var scope = app.Services.CreateScope())
 
     if (dbContext.Database.IsRelational())
     {
+        int retries = 0;
+        while (!dbContext.Database.CanConnect() && retries < 10)
+        {
+            Console.WriteLine("Database is not ready yet. Waiting 3 seconds...");
+            Thread.Sleep(3000);
+            retries++;
+        }
+
         dbContext.Database.Migrate();
     }
 }
