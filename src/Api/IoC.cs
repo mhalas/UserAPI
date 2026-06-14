@@ -109,7 +109,7 @@ namespace Api
             var connectionString = configurationManager.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Infrastructure"));
             });
         }
     }
