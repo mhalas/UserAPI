@@ -3,6 +3,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+Console.WriteLine("Register services...");
 IoC.RegisteredServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
@@ -11,6 +12,7 @@ app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
+    Console.WriteLine("Enable Swagger in development environment...");
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
@@ -33,16 +35,30 @@ using (var scope = app.Services.CreateScope())
     if (dbContext.Database.IsRelational())
     {
         int retries = 0;
-        while (!dbContext.Database.CanConnect() && retries < 10)
+        bool migrated = false;
+        while (!migrated && retries < 10)
         {
-            Console.WriteLine("Database is not ready yet. Waiting 3 seconds...");
-            Thread.Sleep(3000);
-            retries++;
+            try
+            {
+                dbContext.Database.Migrate();
+                migrated = true;
+            }
+            catch (Exception ex)
+            {
+                retries++;
+                Console.WriteLine($"Database is not ready yet. Retry {retries}/10. Error: {ex.Message}");
+                if (retries < 10)
+                {
+                    Thread.Sleep(3000);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
-
-        dbContext.Database.Migrate();
     }
 }
 
-
+Console.WriteLine("Run the application...");
 app.Run();
